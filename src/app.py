@@ -1,6 +1,6 @@
 from flet import *
 import time
-
+import test as t
 
 def main(page: Page):
     page.theme_mode = ThemeMode.DARK
@@ -22,6 +22,7 @@ def main(page: Page):
 
         bar_cont.content = None
         page.update()
+
 
         lv = ListView(expand=0, spacing=10, padding=20, auto_scroll=True)
         lv.controls.append(Text(""))
