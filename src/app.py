@@ -22,10 +22,11 @@ def main(page: Page):
 
         bar_cont.content = None
         page.update()
-
-
+        results = t.search_funds(c_val, top_k=3)
+        for result in results:
+            print(f"finCode: {result['finCode']}, Name: {result['name']}, Match Score: {result['match_score']}")
         lv = ListView(expand=0, spacing=10, padding=20, auto_scroll=True)
-        lv.controls.append(Text(""))
+        lv.controls.append(Text(f"finCode: {result['finCode']}, Name: {result['name']}, Match Score: {result['match_score']}"))
         page.add(lv)
 
     def handle_change(e):
