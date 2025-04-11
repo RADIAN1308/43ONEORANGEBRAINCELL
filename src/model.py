@@ -2,9 +2,15 @@ import json
 import faiss
 from sentence_transformers import SentenceTransformer
 
-# Step 1: Load the JSON file
-with open("datasets/json-fixer.json") as f:
-    db_vals = json.load(f)  # Ensure the JSON file is an array of company objects
+# Step 1: Load multiple JSON files
+file_paths = ["datasets/mf.json", "datasets/stock.json"]  # List of JSON file paths
+db_vals = []  # Store all parsed JSON objects
+
+# Loop through each file and parse its contents
+for file_path in file_paths:
+    with open(file_path, "r") as f:
+        for line in f:
+            db_vals.append(json.loads(line.strip()))  # Parse each line as a JSON object
 
 # Fields to extract for encoding and matching
 fields_to_extract = ["finCode", "name", "shortName", "securityType", "sector"]

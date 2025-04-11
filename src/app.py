@@ -1,5 +1,5 @@
 from flet import *
-import test as t
+import model as t
 
 def main(page: Page):
     page.theme_mode = ThemeMode.DARK
@@ -45,7 +45,6 @@ def main(page: Page):
         page.update()
 
         bar_cont.content = None
-        page.update()
         query = c_val.value.strip()
         results = t.search_funds(query, top_k=10)
 
