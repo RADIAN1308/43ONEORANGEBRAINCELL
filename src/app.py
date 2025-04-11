@@ -1,5 +1,4 @@
 from flet import *
-import time
 import test as t
 
 def main(page: Page):
@@ -10,23 +9,68 @@ def main(page: Page):
 
     bar_cont = Container()
 
-    def result_handler(e):
-        r_val = 0
-        bar_cont.content = ProgressBar(width=400, color="amber", bgcolor="#eeeeee", value=None)
-        page.update()
 
-        while r_val < 1:
-            time.sleep(0.2)
-            r_val += 0.1
-            print(r_val)
+
+    def result_handler(e):
+        page.controls.clear()
+        page.add(
+            Row(
+                alignment=MainAxisAlignment.SPACE_BETWEEN,
+                controls=[
+                    Container(
+                        content=IconButton(Icons.MENU, on_click=lambda e: page.open(drawer))
+                    ),
+                    Row(
+                        controls=[
+                            IconButton(Icons.LIGHT_MODE_OUTLINED, on_click=toggle_theme),
+                            IconButton(Icons.CONTACT_SUPPORT, on_click=lambda _: print("L"))
+                        ]
+                    )
+                ]
+            ),
+            Row(
+                alignment=MainAxisAlignment.CENTER,
+                controls=[
+                    c_val,
+                    ElevatedButton(text="Submit", on_click=result_handler),
+                ]
+            ),
+            Row(
+                alignment=MainAxisAlignment.CENTER,
+                controls=[
+                    bar_cont,
+                ]
+            )
+        )
+        page.update()
 
         bar_cont.content = None
         page.update()
-        results = t.search_funds(c_val, top_k=3)
+        query = c_val.value.strip()
+        results = t.search_funds(query, top_k=10)
+
         for result in results:
             print(f"finCode: {result['finCode']}, Name: {result['name']}, Match Score: {result['match_score']}")
-        lv = ListView(expand=0, spacing=10, padding=20, auto_scroll=True)
-        lv.controls.append(Text(f"finCode: {result['finCode']}, Name: {result['name']}, Match Score: {result['match_score']}"))
+
+        lv = ListView(expand=0, spacing=10, padding=20, auto_scroll=False)
+
+        for company in results:
+            c_comp = Container(
+                content=Column(
+                    controls=[
+                        Text(f"Name: {company['name']}", weight=FontWeight.BOLD),
+                        Text(f"Ticker: {company.get('ticker', 'N/A')}"),
+                        Text(f"Type: {company.get('securityType', 'N/A')}"),
+                        Text(f"Sector: {company.get('sector', 'N/A')}"),
+                        Text(f"Match Score: {company['match_score']:.2f}", color=Colors.GREEN),
+                    ],
+                    spacing=5,
+                ),
+                padding=10,
+                border=border.all(1, Colors.GREY),
+                border_radius=5,
+            )
+            lv.controls.append(c_comp)
         page.add(lv)
 
     def handle_change(e):
