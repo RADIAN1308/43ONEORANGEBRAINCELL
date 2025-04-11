@@ -65,7 +65,7 @@ def main(page: Page):
                         Text(f"Match Score: {company['match_score']:.2f}", color=Colors.GREEN),
                     ],
                     spacing=5,
-                    scroll= ScrollMode.ALWAYS
+                    scroll= ScrollMode.AUTO
                 ),
                 padding=10,
                 border=border.all(1, Colors.GREY),
