@@ -1,5 +1,21 @@
 from flet import *
-import model as t
+import requests
+
+def call_api(input_string):
+    url = "https://9314-203-145-52-219.ngrok-free.app/predict"
+    headers = {"Content-Type": "application/json"}
+    payload = {"input_data": input_string}
+
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return {"error": f"Failed with status code {response.status_code}"}
+    except Exception as e:
+        return {"error": str(e)}
+
 
 def main(page: Page):
     page.theme_mode = ThemeMode.DARK
@@ -45,8 +61,8 @@ def main(page: Page):
         page.update()
 
         bar_cont.content = None
-        query = c_val.value.strip()
-        results = t.search_funds(query, top_k=10)
+        input_string =  c_val.value.strip()
+        results = call_api(input_string)
 
         for result in results:
             print(f"Name: {result['name']}, Short Name: {result['shortName']}, Security Type: {result['securityType']}, Match Score: {result['match_score']}")
