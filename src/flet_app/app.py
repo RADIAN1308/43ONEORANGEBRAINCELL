@@ -156,6 +156,7 @@ def main(page: Page):
         hint_text="Please enter IP here",
         on_change=update_url
     )
+    img = Image(src="/resources/app_icon.png",width=150,height=150,fit =ImageFit.CONTAIN)
 
     home_screen = Column(
         [
@@ -163,7 +164,7 @@ def main(page: Page):
                 content=Column(
                     controls=[
                         Container(height=30),
-                        Image(src ="/resources/app_icon.png"),
+
                         Row(
                             alignment=MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
@@ -178,6 +179,7 @@ def main(page: Page):
                                 )
                             ]
                         ),
+
                         Column(
                             alignment=MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
