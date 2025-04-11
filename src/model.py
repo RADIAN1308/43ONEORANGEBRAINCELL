@@ -13,7 +13,7 @@ for file_path in file_paths:
             db_vals.append(json.loads(line.strip()))  # Parse each line as a JSON object
 
 # Fields to extract for encoding and matching
-fields_to_extract = ["finCode", "name", "shortName", "securityType", "sector"]
+fields_to_extract = ["name", "shortName", "securityType"]
 
 # Prepare data for encoding by concatenating specific fields
 entries_to_encode = []
@@ -50,10 +50,8 @@ def search_funds(query: str, top_k: int = 5):
     for i in range(top_k):
         idx = indices[0][i]
         result = {
-            "finCode": fund_details[idx]["finCode"],
-            "name": fund_details[idx]["name"],
+            "name": fund_details[idx].get("name", "N/A"),
             "shortName": fund_details[idx].get("shortName", ""),
-            "sector": fund_details[idx].get("sector", ""),
             "securityType": fund_details[idx].get("securityType", ""),
             "match_score": distances[0][i]
         }
@@ -61,10 +59,10 @@ def search_funds(query: str, top_k: int = 5):
     return results
 
 # Step 5: Query Example
-query = "Funds with HDFC holdings"
+query = "icici"
 results = search_funds(query, top_k=3)
 
 # Print the Results
 print("Matching Funds:")
 for result in results:
-    print(f"finCode: {result['finCode']}, Name: {result['name']}, Match Score: {result['match_score']}")
+    print(f"Name: {result['name']}, Short Name: {result['shortName']}, Security Type: {result['securityType']}, Match Score: {result['match_score']}")

@@ -1,35 +1,39 @@
-import flet as ft
+import json
 
-def main(page: ft.Page):
-    # Create a list of inner containers
-    inner_containers = [
-        ft.Container(
-            content=ft.Text(f"Container {i}"),
-            width=200,
-            height=150,
-            bgcolor=ft.colors.AMBER if i % 2 == 0 else ft.colors.BLUE,
-            alignment=ft.alignment.center,
-            border_radius=10,
-            margin=10,
-        )
-        for i in range(10)  # Generate 10 containers
-    ]
+# The given JSON data
+data = {
+    "finCode": 233727,
+    "bseScripCode": 710045,
+    "bseScripName": "JCOPOCRPS1",
+    "bseScripGroup": None,
+    "name": "JCOPOCRPS1",
+    "industryCode": 113,
+    "industry": "Unspecified",
+    "hseCode": 206,
+    "ticker": None,
+    "nseSeries": None,
+    "isin": "INE666A03065",
+    "shortName": "JCOPOCRPS1",
+    "incMonth": "-",
+    "incYear": None,
+    "status": "Preference",
+    "sublisting": None,
+    "bseScripId": "JCOPOCRPS1",
+    "bseSublisting": None,
+    "nseSublisting": None,
+    "flag": "A",
+    "securityType": "EQUITIES",
+    "internalSecurityId": 2599172046,
+    "sector": "Materials",
+    "sectorExposure": {"Materials": 100.0},
+    "category": "Others",
+    "sizeExposure": {"Others": 100.0},
+    "assetAllocation": {"equity": 100.0},
+    "companyDescription": "Jhagadia Copper Limited manufactures copper cathodes, alloy wires, rods, bearing materials, and other related products."
+}
 
-    # Create a parent container with scrolling
-    scrollable_parent = ft.Container(
-        content=ft.Column(
-            controls=inner_containers,  # Add the list of child containers
-            scroll="auto"               # Enable scrolling
-        ),
-        width=250,
-        height=400,
-        bgcolor=ft.colors.GREY_200,
-        padding=10,
-        border_radius=10,
-        alignment=ft.alignment.top_center,
-    )
-
-    # Add the scrollable parent container to the page
-    page.add(scrollable_parent)
-
-ft.app(target=main)
+# Extract and display assetAllocation
+asset_allocation = data.get("assetAllocation", {})
+print("Asset Allocation:")
+for key, value in asset_allocation.items():
+    print(f"{key}: {value}%")

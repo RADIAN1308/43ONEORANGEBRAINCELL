@@ -49,7 +49,7 @@ def main(page: Page):
         results = t.search_funds(query, top_k=10)
 
         for result in results:
-            print(f"finCode: {result['finCode']}, Name: {result['name']}, Match Score: {result['match_score']}")
+            print(f"Name: {result['name']}, Short Name: {result['shortName']}, Security Type: {result['securityType']}, Match Score: {result['match_score']}")
 
         lv = ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
 
@@ -58,9 +58,8 @@ def main(page: Page):
                 content=Column(
                     controls=[
                         Text(f"Name: {company['name']}", weight=FontWeight.BOLD),
-                        Text(f"Ticker: {company.get('ticker', 'N/A')}"),
+                        Text(f"Short Name: {company.get('shortName', 'N/A')}"),
                         Text(f"Type: {company.get('securityType', 'N/A')}"),
-                        Text(f"Sector: {company.get('sector', 'N/A')}"),
                         Text(f"Match Score: {company['match_score']:.2f}", color=Colors.GREEN),
                     ],
                     spacing=5,
@@ -115,7 +114,7 @@ def main(page: Page):
         ],
     )
 
-    c_val = TextField(label="Enter company name", hint_text="Please enter text here")
+    c_val = TextField(label="Enter company name", hint_text="Please enter text here", on_submit=result_handler)
 
 
     home_screen = Column(
