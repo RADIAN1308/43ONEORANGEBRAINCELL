@@ -79,8 +79,6 @@ def main(page: Page):
         elif e.control.selected_index == 1:
             page.controls.clear()
             page.controls.append(search_screen)
-        elif e.control.selected_index == 2:
-            print("to be implemented")
         page.update()
 
     def toggle_theme(e):
@@ -105,11 +103,6 @@ def main(page: Page):
                 icon=Icon(Icons.SEARCH_ROUNDED),
                 label="Search",
                 selected_icon=Icons.SEARCH_ROUNDED,
-            ),
-                NavigationDrawerDestination(
-                icon=Icon(Icons.CALENDAR_MONTH_ROUNDED),
-                label="Item 3",
-                selected_icon=Icons.CALENDAR_MONTH_ROUNDED,
             ),
         ],
     )
