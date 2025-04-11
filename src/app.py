@@ -52,7 +52,7 @@ def main(page: Page):
         for result in results:
             print(f"finCode: {result['finCode']}, Name: {result['name']}, Match Score: {result['match_score']}")
 
-        lv = ListView(expand=0, spacing=10, padding=20, auto_scroll=False)
+        lv = ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
 
         for company in results:
             c_comp = Container(
@@ -65,13 +65,13 @@ def main(page: Page):
                         Text(f"Match Score: {company['match_score']:.2f}", color=Colors.GREEN),
                     ],
                     spacing=5,
-                    scroll= ScrollMode.AUTO
                 ),
                 padding=10,
                 border=border.all(1, Colors.GREY),
                 border_radius=5,
             )
             lv.controls.append(c_comp)
+
         page.add(lv)
 
     def handle_change(e):
@@ -80,7 +80,7 @@ def main(page: Page):
             page.controls.append(home_screen)
         elif e.control.selected_index == 1:
             page.controls.clear()
-            page.controls.append(settings_screen)
+            page.controls.append(search_screen)
         elif e.control.selected_index == 2:
             print("to be implemented")
         page.update()
@@ -144,7 +144,7 @@ def main(page: Page):
         ]
     )
 
-    settings_screen = Column(
+    search_screen = Column(
         [
             Container(
                 content=Column(
@@ -182,7 +182,7 @@ def main(page: Page):
         ]
     )
 
-    page.add(settings_screen)
+    page.add(search_screen)
 
 
 app(main)
