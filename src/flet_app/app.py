@@ -8,9 +8,6 @@ url = ""
 
 # url = "https://9314-203-145-52-219.ngrok-free.app/predict"
 
-
-
-
 def call_api(input_string):
     headers = {"Content-Type": "application/json"}
     payload = {"input_data": input_string}
@@ -42,10 +39,12 @@ def main(page: Page):
 
     bar_cont = Container()
 
+
     def update_url(e):
         global url
         url = e.control.value.strip()
         print(f"URL: {url}")
+
 
     def result_handler(e):
         page.controls.clear()
@@ -116,6 +115,7 @@ def main(page: Page):
 
         page.add(lv)
 
+
     def handle_change(e):
         if e.control.selected_index == 0:
             page.controls.clear()
@@ -125,12 +125,14 @@ def main(page: Page):
             page.controls.append(search_screen)
         page.update()
 
+
     def toggle_theme(e):
         if page.theme_mode == ThemeMode.LIGHT:
             page.theme_mode = ThemeMode.DARK
         else:
             page.theme_mode = ThemeMode.LIGHT
         page.update()
+
 
     drawer = NavigationDrawer(
         on_change=handle_change,
@@ -151,12 +153,6 @@ def main(page: Page):
     )
 
     c_val = TextField(label="Enter company name", hint_text="Please enter text here", on_submit=result_handler)
-    url_field = TextField(
-        label="Enter Ngrok IP",
-        hint_text="Please enter IP here",
-        on_change=update_url
-    )
-    img = Image(src="/resources/app_icon.png",width=150,height=150,fit =ImageFit.CONTAIN)
 
     home_screen = Column(
         [
@@ -164,7 +160,6 @@ def main(page: Page):
                 content=Column(
                     controls=[
                         Container(height=30),
-
                         Row(
                             alignment=MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
@@ -180,10 +175,17 @@ def main(page: Page):
                             ]
                         ),
 
-                        Column(
-                            alignment=MainAxisAlignment.SPACE_BETWEEN,
+                        Row(
+                            alignment=MainAxisAlignment.CENTER,
                             controls=[
-                                url_field
+                                Image(src="app_icon.png",width=150,height=150,fit =ImageFit.CONTAIN)
+                            ]
+                        ),
+
+                        Column(
+                            alignment=MainAxisAlignment.CENTER,
+                            controls=[
+                                TextField(label="Enter Ngrok IP", hint_text="Please enter IP here", on_change=update_url)
                             ]
                         )
                     ]
