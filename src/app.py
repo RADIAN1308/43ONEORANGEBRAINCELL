@@ -1,8 +1,13 @@
 from flet import *
 import requests
 
+global url
+
+url = ""
+
+# url = "https://9314-203-145-52-219.ngrok-free.app/predict"
+
 def call_api(input_string):
-    url = "https://9314-203-145-52-219.ngrok-free.app/predict"
     headers = {"Content-Type": "application/json"}
     payload = {"input_data": input_string}
 
@@ -23,9 +28,14 @@ def main(page: Page):
     page.horizontal_alignment = CrossAxisAlignment.CENTER
     page.update()
 
+    global url
+
     bar_cont = Container()
 
-
+    def update_url(e):
+        global url
+        url = e.control.value.strip()
+        print(f"URL: {url}")
 
     def result_handler(e):
         page.controls.clear()
@@ -61,11 +71,18 @@ def main(page: Page):
         page.update()
 
         bar_cont.content = None
-        input_string =  c_val.value.strip()
+        input_string = c_val.value.strip()
+        if not url:
+            bar_cont.content = Text("Please provide a valid URL.", color=Colors.RED)
+            page.update()
+            return
+
         results = call_api(input_string)
 
-        for result in results:
-            print(f"Name: {result['name']}, Short Name: {result['shortName']}, Security Type: {result['securityType']}, Match Score: {result['match_score']}")
+        if "error" in results:
+            bar_cont.content = Text(results["error"], color=Colors.RED)
+            page.update()
+            return
 
         lv = ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
 
@@ -104,7 +121,6 @@ def main(page: Page):
             page.theme_mode = ThemeMode.LIGHT
         page.update()
 
-
     drawer = NavigationDrawer(
         on_change=handle_change,
         controls=[
@@ -124,7 +140,11 @@ def main(page: Page):
     )
 
     c_val = TextField(label="Enter company name", hint_text="Please enter text here", on_submit=result_handler)
-
+    url_field = TextField(
+        label="Enter Ngrok IP",
+        hint_text="Please enter IP here",
+        on_change=update_url
+    )
 
     home_screen = Column(
         [
@@ -143,6 +163,12 @@ def main(page: Page):
                                         IconButton(Icons.CONTACT_SUPPORT, on_click=lambda _: print("L"))
                                     ]
                                 )
+                            ]
+                        ),
+                        Column(
+                            alignment=MainAxisAlignment.SPACE_BETWEEN,
+                            controls=[
+                                url_field
                             ]
                         )
                     ]
@@ -189,7 +215,7 @@ def main(page: Page):
         ]
     )
 
-    page.add(search_screen)
+    page.add(home_screen)
 
 
 app(main)
