@@ -163,10 +163,7 @@ def main(page: Page):
                 content=Column(
                     controls=[
                         Container(height=30),
-                        Image(src ="growth.png",
-                              width=150,
-                              height=150
-                              ,),
+                        Image(src ="/resources/app_icon.png"),
                         Row(
                             alignment=MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
