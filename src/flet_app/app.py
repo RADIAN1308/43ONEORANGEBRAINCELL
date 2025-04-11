@@ -88,6 +88,7 @@ def main(page: Page):
             return
 
         results = call_api(input_string)
+        results = list({frozenset(item.items()): item for item in results}.values())
 
         if "error" in results:
             bar_cont.content = Text(results["error"], color=Colors.RED)
