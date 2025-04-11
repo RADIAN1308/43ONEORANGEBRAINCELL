@@ -65,6 +65,7 @@ def main(page: Page):
                         Text(f"Match Score: {company['match_score']:.2f}", color=Colors.GREEN),
                     ],
                     spacing=5,
+                    scroll= ScrollMode.ALWAYS
                 ),
                 padding=10,
                 border=border.all(1, Colors.GREY),
@@ -91,8 +92,6 @@ def main(page: Page):
             page.theme_mode = ThemeMode.LIGHT
         page.update()
 
-    def placeholder(e):
-        print("L")
 
     drawer = NavigationDrawer(
         on_change=handle_change,
@@ -119,7 +118,6 @@ def main(page: Page):
 
     c_val = TextField(label="Enter company name", hint_text="Please enter text here")
 
-    app = Container()
 
     home_screen = Column(
         [
@@ -142,8 +140,7 @@ def main(page: Page):
                         )
                     ]
                 )
-            ),
-            app
+            )
         ]
     )
 
