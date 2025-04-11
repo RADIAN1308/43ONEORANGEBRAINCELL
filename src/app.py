@@ -47,15 +47,10 @@ def main(page: ft.Page):
                 )
 
                 ,ft.Row(
-                            controls=[ft.TextField(hint_text="What query must be processed?", expand=True),
+                            controls=[ft.TextField(hint_text="What query must be processed?", expand=True),ft.ElevatedButton("Search",icon=Icons.SEARCH_ROUNDED,)
 
                           ]
                     )
-                , ft.Row(
-                    controls=[
-                              ft.ElevatedButton(icon=Icons.SEARCH_ROUNDED,)
-                              ]
-                )
             ]
         )
     )
