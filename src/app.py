@@ -1,5 +1,6 @@
 from flet import *
-import requests
+import urllib.request
+import json
 
 global url
 
@@ -7,17 +8,26 @@ url = ""
 
 # url = "https://9314-203-145-52-219.ngrok-free.app/predict"
 
+
+
+
 def call_api(input_string):
     headers = {"Content-Type": "application/json"}
     payload = {"input_data": input_string}
 
     try:
-        response = requests.post(url, json=payload, headers=headers)
+        # Convert payload to JSON string and encode to bytes
+        data = json.dumps(payload).encode('utf-8')
 
-        if response.status_code == 200:
-            return response.json()
-        else:
-            return {"error": f"Failed with status code {response.status_code}"}
+        # Create request object
+        req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+
+        # Send request and get response
+        with urllib.request.urlopen(req) as response:
+            response_data = response.read().decode('utf-8')
+            return json.loads(response_data)
+    except urllib.error.HTTPError as e:
+        return {"error": f"Failed with status code {e.code}"}
     except Exception as e:
         return {"error": str(e)}
 
