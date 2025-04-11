@@ -163,7 +163,10 @@ def main(page: Page):
                 content=Column(
                     controls=[
                         Container(height=30),
-                        Image(src ="C:\Users\Adrian Brine\PycharmProjects\QX-25_PSID2_T43\src\flet_app\resources\growth.png"),
+                        Image(src ="growth.png",
+                              width=150,
+                              height=150
+                              ,),
                         Row(
                             alignment=MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
