@@ -10,7 +10,7 @@ So we built a compact, intelligent language model that accurately matches a user
 
 
 
-## SLM Model: MiniLM L6 v2
+### SLM Model: MiniLM L6 v2
 
 This is a sentence-transformers model: It maps sentences & paragraphs to a 384 dimensional dense vector space and can be used for tasks like clustering or semantic search.
 
@@ -67,6 +67,6 @@ flet run [script]
 ## Authors
 
 - [@Calvin](https://github.com/Calvyin)
-- [@Radian](https://github.com/Radian1308)
-- [@Ishita](https://github.com/ishitasampat)
 - [@DamnOctopus](https://github.com/damnoctopus)
+- [@Ishita](https://github.com/ishitasampat)
+- [@Radian](https://github.com/Radian1308)
