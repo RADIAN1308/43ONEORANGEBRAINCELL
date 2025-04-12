@@ -17,7 +17,7 @@ app = Flask(__name__)
 def predict():
 
     input_data = request.json
-    prediction = m.search_funds(input_data,top_k=5)#fuction call to ai
+    prediction = m.search_funds(input_data,top_k=4)#fuction call to ai
     json_list = json.dumps(prediction,cls=NumpyEncoder)#to jsonify list
     return json_list
 
