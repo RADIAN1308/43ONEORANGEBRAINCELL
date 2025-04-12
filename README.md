@@ -67,6 +67,6 @@ flet run [script]
 ## Authors
 
 - [@Calvin](https://github.com/Calvyin)
-- [@Radian](https://github.com/Radian1308)
-- [@Ishita](https://github.com/ishitasampat)
 - [@DamnOctopus](https://github.com/damnoctopus)
+- [@Ishita](https://github.com/ishitasampat)
+- [@Radian](https://github.com/Radian1308)
