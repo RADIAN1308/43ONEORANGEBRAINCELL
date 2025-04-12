@@ -94,14 +94,14 @@ def main(page: Page):
         controls=[
             Container(height=12),
             NavigationDrawerDestination(
-                label="Item 1",
+                label="Home",
                 icon=Icons.HOME_ROUNDED,
                 selected_icon=Icon(Icons.HOME_ROUNDED),
             ),
             Divider(thickness=2),
             NavigationDrawerDestination(
                 icon=Icon(Icons.SEARCH_ROUNDED),
-                label="Item 2",
+                label="Search",
                 selected_icon=Icons.SEARCH_ROUNDED,
             )
         ],
@@ -166,6 +166,11 @@ def main(page: Page):
                 alignment=MainAxisAlignment.CENTER,
                 controls=[
                     c_val,
+                ]
+            ),
+            Row(
+                alignment=MainAxisAlignment.CENTER,
+                controls=[
                     ElevatedButton(text="Submit", on_click=result_handler),
                 ]
             ),
