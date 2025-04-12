@@ -112,6 +112,7 @@ def main(page: Page):
 
     home_screen = Column(
         controls=[
+            Container(height=30),
             header,
             Row(
                 alignment=MainAxisAlignment.CENTER,
@@ -125,19 +126,27 @@ def main(page: Page):
                     Text("SLM FindMyFunds", size=24, text_align=TextAlign.CENTER),
                 ]
             ),
-            Row(
+            Column(
                 alignment=MainAxisAlignment.CENTER,
                 controls=[
                 TextField(label="Enter Ngrok IP", hint_text="Please enter IP here", on_change=update_url),
-                ElevatedButton("Start your Search", icon=Icons.SEARCH_OUTLINED, on_click=lambda e: switch_to_search(),
-                           bgcolor="#DC3535", color="#ffffff", icon_color="#ffffff"),
+
                 ]
-            )
+            ),
+            Row(
+                alignment=MainAxisAlignment.CENTER,
+                controls=[
+                    ElevatedButton("Start your Search", icon=Icons.SEARCH_OUTLINED,
+                                   on_click=lambda e: switch_to_search(),
+                                   bgcolor="#DC3535", color="#ffffff", icon_color="#ffffff"),
+                ]
+            ),
         ]
     )
 
     search_screen = Column(
         controls=[
+            Container(height=30),
             header,
             Row(
                 alignment=MainAxisAlignment.CENTER,
