@@ -33,6 +33,9 @@ def main(page: Page):
     page.theme_mode = ThemeMode.DARK
     page.title = ""
     page.horizontal_alignment = CrossAxisAlignment.CENTER
+    page.window.width = 650
+    page.window.height = 800
+
     page.update()
 
     global url
@@ -133,6 +136,10 @@ def main(page: Page):
             page.theme_mode = ThemeMode.LIGHT
         page.update()
 
+    def switch_to_search():
+        page.controls.clear()
+        page.controls.append(search_screen)
+        page.update()
 
     drawer = NavigationDrawer(
         on_change=handle_change,
@@ -181,11 +188,26 @@ def main(page: Page):
                                 Image(src="app_icon.png",width=150,height=150,fit =ImageFit.CONTAIN)
                             ]
                         ),
+                        Row(
+                            alignment=MainAxisAlignment.CENTER,
+                            controls=[
+                                Text("LLM FindMyFunds", size=24, text_align=TextAlign.CENTER, )
+                            ]
+                        ),
+                        Container(height=40),
+
 
                         Column(
                             alignment=MainAxisAlignment.CENTER,
                             controls=[
-                                TextField(label="Enter Ngrok IP", hint_text="Please enter IP here", on_change=update_url)
+                                TextField(label="Enter Ngrok IP", hint_text="Please enter IP here", on_change=update_url,bgcolor="#FF6500",color="#ffffff")
+                            ]
+                        ),
+                        Row(
+                            alignment=MainAxisAlignment.CENTER,
+                            controls=[
+                                ElevatedButton("Start your Search", icon=Icons.SEARCH_OUTLINED, on_click=lambda e: switch_to_search(),bgcolor="#DC3535",color="#ffffff",icon_color="#ffffff")
+
                             ]
                         )
                     ]
