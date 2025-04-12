@@ -53,13 +53,14 @@ def main(page: Page):
             Row(
                 alignment=MainAxisAlignment.SPACE_BETWEEN,
                 controls=[
+                    Container(height=50),
                     Container(
                         content=IconButton(Icons.MENU, on_click=lambda e: page.open(drawer))
                     ),
                     Row(
                         controls=[
                             IconButton(Icons.LIGHT_MODE_OUTLINED, on_click=toggle_theme),
-                            IconButton(Icons.CONTACT_SUPPORT, on_click=lambda _: print("L"))
+                            IconButton(Icons.CONTACT_SUPPORT, on_click=lambda _: open_web)
                         ]
                     )
                 ]
@@ -139,6 +140,9 @@ def main(page: Page):
         page.controls.append(search_screen)
         page.update()
 
+    def open_web():
+        page.launch_url("https://ishitasampat.github.io/QX25-PS2-T43-Website/")
+
     drawer = NavigationDrawer(
         on_change=handle_change,
         controls=[
@@ -164,7 +168,7 @@ def main(page: Page):
             Container(
                 content=Column(
                     controls=[
-                        Container(height=30),
+                        Container(height=50),
                         Row(
                             alignment=MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
@@ -174,7 +178,7 @@ def main(page: Page):
                                 Row(
                                     controls=[
                                         IconButton(Icons.LIGHT_MODE_OUTLINED, on_click=toggle_theme),
-                                        IconButton(Icons.CONTACT_SUPPORT, on_click=lambda _: print("L"))
+                                        IconButton(Icons.CONTACT_SUPPORT, on_click=lambda _: open_web)
                                     ]
                                 )
                             ]
@@ -189,7 +193,7 @@ def main(page: Page):
                         Row(
                             alignment=MainAxisAlignment.CENTER,
                             controls=[
-                                Text("LLM FindMyFunds", size=24, text_align=TextAlign.CENTER, )
+                                Text("SLM FindMyFunds", size=24, text_align=TextAlign.CENTER, )
                             ]
                         ),
                         Container(height=40),
@@ -219,6 +223,7 @@ def main(page: Page):
             Container(
                 content=Column(
                     controls=[
+                        Container(height=50),
                         Row(
                             alignment=MainAxisAlignment.SPACE_BETWEEN,
                             controls=[
@@ -228,7 +233,7 @@ def main(page: Page):
                                 Row(
                                     controls=[
                                         IconButton(Icons.LIGHT_MODE_OUTLINED, on_click=toggle_theme),
-                                        IconButton(Icons.CONTACT_SUPPORT, on_click=lambda _: print("L"))
+                                        IconButton(Icons.CONTACT_SUPPORT, on_click=lambda _: open_web)
                                     ]
                                 )
                             ]
