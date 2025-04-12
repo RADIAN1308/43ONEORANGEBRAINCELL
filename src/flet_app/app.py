@@ -72,6 +72,16 @@ def main(page: Page):
 
         page.update()
 
+    def handle_change(e):
+        # page_toggle(e)
+        if e.control.selected_index == 0:
+            page.controls.clear()
+            page.controls.append(home_screen)
+        elif e.control.selected_index == 1:
+            page.controls.clear()
+            page.controls.append(search_screen)
+        page.update()
+
     def toggle_theme(e):
         if page.theme_mode == ThemeMode.LIGHT:
             page.theme_mode = ThemeMode.DARK
@@ -80,16 +90,20 @@ def main(page: Page):
         page.update()
 
     drawer = NavigationDrawer(
+        on_change=handle_change,
         controls=[
+            Container(height=12),
             NavigationDrawerDestination(
-                label="Home",
+                label="Item 1",
                 icon=Icons.HOME_ROUNDED,
+                selected_icon=Icon(Icons.HOME_ROUNDED),
             ),
             Divider(thickness=2),
             NavigationDrawerDestination(
-                icon=Icons.SEARCH_ROUNDED,
-                label="Search",
-            ),
+                icon=Icon(Icons.SEARCH_ROUNDED),
+                label="Item 2",
+                selected_icon=Icons.SEARCH_ROUNDED,
+            )
         ],
     )
 
