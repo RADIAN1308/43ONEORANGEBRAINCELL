@@ -198,7 +198,7 @@ def main(page: Page):
                         Column(
                             alignment=MainAxisAlignment.CENTER,
                             controls=[
-                                TextField(label="Enter Ngrok IP", hint_text="Please enter IP here", on_change=update_url,bgcolor="#FF6500",color="#ffffff")
+                                TextField(label="Enter Ngrok IP", hint_text="Please enter IP here", on_change=update_url,border_color="f9a56d",color="#ffffff")
                             ]
                         ),
                         Row(
