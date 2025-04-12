@@ -33,8 +33,6 @@ def main(page: Page):
     page.theme_mode = ThemeMode.DARK
     page.title = ""
     page.horizontal_alignment = CrossAxisAlignment.CENTER
-    page.window.width = 650
-    page.window.height = 800
 
     page.update()
 
@@ -135,7 +133,7 @@ def main(page: Page):
         else:
             page.theme_mode = ThemeMode.LIGHT
         page.update()
-
+# oogabooga
     def switch_to_search():
         page.controls.clear()
         page.controls.append(search_screen)
